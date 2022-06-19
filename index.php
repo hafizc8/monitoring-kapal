@@ -3,6 +3,17 @@
     if (!isset($_SESSION['nama_lengkap'])) {
         echo "<script language=\"javascript\">alert(\"Silahkan login terlebih dahulu!\");document.location.href='login.php';</script>";
     }
+
+    include "koneksi.php";
+
+    $query = "SELECT * FROM data_kapal";
+    $sql = mysqli_query($koneksi, $query);
+
+    $data = [];
+    while($row = mysqli_fetch_array($sql))
+    {
+        $data[] = $row;
+    }
 ?>
 <?php 
     include 'header.php';
@@ -25,24 +36,37 @@
                             <th>Tgl Tiba</th>
                             <th>Tgl Berangkat</th>
                             <th>Tgl Input Admin</th>
+                            <th>Status Dokumen</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php for ($i=1; $i<=15; $i++): ?>
+                        <?php $i = 1; ?>
+                        <?php foreach($data as $v): ?>
                             <tr>
-                                <td><?= $i ?></td>
-                                <td>TK. SUMBER KENCANA <?= $i ?></td>
-                                <td>18 Jun 2022</td>
-                                <td>22 Jun 2022</td>
-                                <td>18 Jun 2022, 22:30</td>
+                                <td><?= $i++ ?></td>
+                                <td><?= $v['nama_kapal'] ?></td>
+                                <td><?= $v['tgl_tiba'] ?? '-' ?></td>
+                                <td><?= $v['tgl_berangkat'] ?? '-' ?></td>
+                                <td><?= $v['tgl_input'] ?></td>
+                                <td>
+                                    <?php if (
+                                        $v['spb'] != null || $v['manifest'] != null || $v['crewlist'] != null || $v['buku_kesehatan'] != null || $v['buku_pelaut'] != null || $v['ijazah_perwira'] != null || $v['bst'] != null || $v['pasport'] != null || $v['surat_laut'] != null || $v['surat_ukur'] != null || 
+                                        $v['serti_konstruksi'] != null || $v['serti_pelengkapan_barang'] != null || $v['serti_radio'] != null || $v['serti_lambung'] != null || $v['serti_mesin'] != null || $v['serti_garis_muat'] != null || $v['serti_pencemaran'] != null || $v['minimum_safe_manning'] != null || $v['serti_anti_teritip'] != null || $v['serti_liferaft'] != null || 
+                                        $v['serti_damkar'] != null || $v['hru'] != null || $v['doc'] != null || $v['serti_keselamatan_sementara'] != null || $v['rpt'] != null || $v['buku_sijil'] != null || $v['pkl'] != null || $v['sscec'] != null || $v['wreak'] != null || $v['clc'] != null || 
+                                        $v['orb'] != null || $v['izin_stasiun_radio'] != null || $v['serti_asuransi_kapal'] != null || $v['siupal'] != null || $v['sk_susunan_perwira'] != null || $v['stempel_kapal'] != null
+                                    ) : ?>
+                                        <span class="badge bg-success">Sudah Lengkap</span>
+                                    <?php else : ?>
+                                        <span class="badge bg-warning">Belum Lengkap</span>
+                                    <?php endif ?>
+                                </td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-info text-white">Lihat</a>
-                                    <a href="#" class="btn btn-sm btn-primary">Ubah</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Hapus</a>
+                                    <a href="form-edit-kapal.php?id_kapal=<?= $v['id_kapal'] ?>" class="btn btn-sm btn-primary">Ubah</a>
+                                    <a href="action-hapus-kapal.php?id_kapal=<?= $v['id_kapal'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
                                 </td>
                             </tr>
-                        <?php endfor ?>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
