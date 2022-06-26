@@ -51,10 +51,10 @@
                                 <td><?= $v['tgl_input'] ?></td>
                                 <td>
                                     <?php if (
-                                        $v['spb'] != null || $v['manifest'] != null || $v['crewlist'] != null || $v['buku_kesehatan'] != null || $v['buku_pelaut'] != null || $v['ijazah_perwira'] != null || $v['bst'] != null || $v['pasport'] != null || $v['surat_laut'] != null || $v['surat_ukur'] != null || 
-                                        $v['serti_konstruksi'] != null || $v['serti_pelengkapan_barang'] != null || $v['serti_radio'] != null || $v['serti_lambung'] != null || $v['serti_mesin'] != null || $v['serti_garis_muat'] != null || $v['serti_pencemaran'] != null || $v['minimum_safe_manning'] != null || $v['serti_anti_teritip'] != null || $v['serti_liferaft'] != null || 
-                                        $v['serti_damkar'] != null || $v['hru'] != null || $v['doc'] != null || $v['serti_keselamatan_sementara'] != null || $v['rpt'] != null || $v['buku_sijil'] != null || $v['pkl'] != null || $v['sscec'] != null || $v['wreak'] != null || $v['clc'] != null || 
-                                        $v['orb'] != null || $v['izin_stasiun_radio'] != null || $v['serti_asuransi_kapal'] != null || $v['siupal'] != null || $v['sk_susunan_perwira'] != null || $v['stempel_kapal'] != null
+                                        $v['spb'] != null && $v['manifest'] != null && $v['crewlist'] != null && $v['buku_kesehatan'] != null && $v['buku_pelaut'] != null && $v['ijazah_perwira'] != null && $v['bst'] != null && $v['pasport'] != null && $v['surat_laut'] != null && $v['surat_ukur'] != null && 
+                                        $v['serti_konstruksi'] != null && $v['serti_perlengkapan_barang'] != null && $v['serti_radio'] != null && $v['serti_lambung'] != null && $v['serti_mesin'] != null && $v['serti_garis_muat'] != null && $v['serti_pencemaran'] != null && $v['minimum_safe_manning'] != null && $v['serti_anti_teritip'] != null && $v['serti_liferaft'] != null && 
+                                        $v['serti_damkar'] != null && $v['hru'] != null && $v['doc'] != null && $v['serti_keselamatan_sementara'] != null && $v['rpt'] != null && $v['buku_sijil'] != null && $v['pkl'] != null && $v['sscec'] != null && $v['wreak'] != null && $v['clc'] != null && 
+                                        $v['orb'] != null && $v['izin_stasiun_radio'] != null && $v['serti_asuransi_kapal'] != null && $v['siupal'] != null && $v['sk_susunan_perwira'] != null && $v['stempel_kapal'] != null
                                     ) : ?>
                                         <span class="badge bg-success">Sudah Lengkap</span>
                                     <?php else : ?>
