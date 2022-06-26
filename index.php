@@ -46,9 +46,9 @@
                             <tr>
                                 <td><?= $i++ ?></td>
                                 <td><?= $v['nama_kapal'] ?></td>
-                                <td><?= $v['tgl_tiba'] ?? '-' ?></td>
-                                <td><?= $v['tgl_berangkat'] ?? '-' ?></td>
-                                <td><?= $v['tgl_input'] ?></td>
+                                <td><?= ($v['tgl_tiba'] != null ? date('d/m/Y', strtotime($v['tgl_tiba'])) : '-') ?></td>
+                                <td><?= ($v['tgl_berangkat'] != null ? date('d/m/Y', strtotime($v['tgl_berangkat'])) : '-') ?></td>
+                                <td><?= date('d/m/Y, H:i', strtotime($v['tgl_input'])) ?></td>
                                 <td>
                                     <?php if (
                                         $v['spb'] != null && $v['manifest'] != null && $v['crewlist'] != null && $v['buku_kesehatan'] != null && $v['buku_pelaut'] != null && $v['ijazah_perwira'] != null && $v['bst'] != null && $v['pasport'] != null && $v['surat_laut'] != null && $v['surat_ukur'] != null && 
