@@ -3,6 +3,7 @@
 
     if (isset($_POST['tambah'])) {
         $id_kapal = $_POST['id_kapal'];
+        $id_kapal2 = $_POST['id_kapal2'];
         $nomor = $_POST['nomor'];
         $tanggal_invoice = $_POST['tanggal_invoice'];
     
@@ -11,7 +12,7 @@
             exit;
         }
     
-        $query = "INSERT INTO invoice (nomor, id_kapal, tanggal) values('$nomor', $id_kapal, '$tanggal_invoice')";
+        $query = "INSERT INTO invoice (nomor, id_kapal, id_kapal2, tanggal) values('$nomor', $id_kapal, $id_kapal2, '$tanggal_invoice')";
     
         if (mysqli_query($koneksi, $query)) {
             $last_id = mysqli_insert_id($koneksi);

@@ -11,11 +11,14 @@
             a.*, 
             b.nama_kapal,
             b.tgl_tiba,
+            e.nama_kapal as nama_kapal2,
+            e.tgl_tiba as tgl_tiba2,
             SUM(c.total) as jumlah
         FROM invoice AS a 
         INNER JOIN data_kapal AS b ON a.id_kapal = b.id_kapal
         LEFT JOIN invoice_detail as c ON a.id_invoice = c.id_invoice
-        GROUP BY a.id_invoice, a.nomor, a.id_kapal, a.tanggal, b.nama_kapal, b.tgl_tiba
+        LEFT JOIN data_kapal AS e ON a.id_kapal2 = e.id_kapal
+        GROUP BY a.id_invoice, a.nomor, a.id_kapal, a.tanggal, b.nama_kapal, b.tgl_tiba, e.nama_kapal, e.tgl_tiba
         ORDER BY id_invoice ASC
     ";
     $sql = mysqli_query($koneksi, $query);
@@ -56,12 +59,16 @@
                             <tr>
                                 <td><?= $i++ ?></td>
                                 <td><?= $v['nomor'] ?></td>
-                                <td><?= ($v['nama_kapal'] ?? '-').' <b>('.($v['tgl_tiba'] != null ? date('d/m/Y', strtotime($v['tgl_tiba'])) : '-').')</b>' ?></td>
+                                <td>
+                                    1. <?= ($v['nama_kapal'] ?? '-').' <b>('.($v['tgl_tiba'] != null ? date('d/m/Y', strtotime($v['tgl_tiba'])) : '-').')</b>' ?><br>
+                                    2. <?= $v['nama_kapal2'] == '' ? '-' : ($v['nama_kapal2'] ?? '-').' <b>('.($v['tgl_tiba2'] != null ? date('d/m/Y', strtotime($v['tgl_tiba2'])) : '-').')</b>' ?>
+                                </td>
                                 <td><?= date('d/m/Y', strtotime($v['tanggal'])) ?></td>
                                 <td><?= rupiah($v['jumlah']) ?></td>
                                 <td class="text-center">
                                     <a href="form-invoice-detail.php?id_invoice=<?= $v['id_invoice'] ?>" class="btn btn-sm btn-primary">Ubah</a>
                                     <a href="action-hapus-invoice.php?id_invoice=<?= $v['id_invoice'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
+                                    <a href="cetak-invoice.php?id_invoice=<?= $v['id_invoice'] ?>" target="_blank" class="btn btn-sm btn-primary">Cetak</a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
