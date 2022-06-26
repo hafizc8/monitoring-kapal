@@ -6,7 +6,18 @@
 
     include "koneksi.php";
 
-    $query = "SELECT a.*, b.nama_kapal FROM invoice AS a INNER JOIN data_kapal AS b ON a.id_kapal = b.id_kapal";
+    $query = "
+        SELECT 
+            a.*, 
+            b.nama_kapal,
+            b.tgl_tiba,
+            SUM(c.total) as jumlah
+        FROM invoice AS a 
+        INNER JOIN data_kapal AS b ON a.id_kapal = b.id_kapal
+        LEFT JOIN invoice_detail as c ON a.id_invoice = c.id_invoice
+        GROUP BY a.id_invoice, a.nomor, a.id_kapal, a.tanggal, b.nama_kapal, b.tgl_tiba
+        ORDER BY id_invoice ASC
+    ";
     $sql = mysqli_query($koneksi, $query);
 
     $data = [];
@@ -35,6 +46,7 @@
                             <th>Nomor Invoice</th>
                             <th>Nama Kapal</th>
                             <th>Tanggal Invoice</th>
+                            <th>Total</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -44,11 +56,12 @@
                             <tr>
                                 <td><?= $i++ ?></td>
                                 <td><?= $v['nomor'] ?></td>
-                                <td><?= $v['nama_kapal'] ?? '-' ?></td>
-                                <td><?= $v['tanggal'] ?? '-' ?></td>
+                                <td><?= ($v['nama_kapal'] ?? '-').' <b>('.($v['tgl_tiba'] != null ? date('d/m/Y', strtotime($v['tgl_tiba'])) : '-').')</b>' ?></td>
+                                <td><?= date('d/m/Y', strtotime($v['tanggal'])) ?></td>
+                                <td><?= rupiah($v['jumlah']) ?></td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-primary">Ubah</a>
-                                    <a href="#" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
+                                    <a href="form-invoice-detail.php?id_invoice=<?= $v['id_invoice'] ?>" class="btn btn-sm btn-primary">Ubah</a>
+                                    <a href="action-hapus-invoice.php?id_invoice=<?= $v['id_invoice'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
                                 </td>
                             </tr>
                         <?php endforeach ?>

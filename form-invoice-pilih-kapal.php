@@ -3,7 +3,7 @@
 
     include "koneksi.php";
     // GET DATA KAPAL
-    $query = "SELECT id_kapal, nama_kapal FROM data_kapal";
+    $query = "SELECT id_kapal, nama_kapal, tgl_tiba FROM data_kapal";
     $sql = mysqli_query($koneksi, $query);
 
     $data = [];
@@ -45,7 +45,16 @@
                                     <select name="id_kapal" id="id_kapal" class="form-control">
                                             <option value="">Pilih data kapal</option>
                                         <?php foreach($data as $v): ?>
-                                            <option value="<?= $v['id_kapal'] ?>"><?= $v['nama_kapal'] ?></option>
+                                            <option value="<?= $v['id_kapal'] ?>"><?= $v['nama_kapal'] .' ('.($v['tgl_tiba'] != null ? date('d/m/Y', strtotime($v['tgl_tiba'])) : '-').')' ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="mb-2 fw-bold">Nama Kapal 2</label>
+                                    <select name="id_kapal2" id="id_kapal2" class="form-control">
+                                            <option value="">Pilih data kapal 2</option>
+                                        <?php foreach($data as $v): ?>
+                                            <option value="<?= $v['id_kapal'] ?>"><?= $v['nama_kapal'] .' ('.($v['tgl_tiba'] != null ? date('d/m/Y', strtotime($v['tgl_tiba'])) : '-').')' ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
