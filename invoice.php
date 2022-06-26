@@ -47,7 +47,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Nomor Invoice</th>
-                            <th>Nama Kapal</th>
+                            <th>Nama Kapal (Tgl Tiba)</th>
                             <th>Tanggal Invoice</th>
                             <th>Total</th>
                             <th>Aksi</th>
