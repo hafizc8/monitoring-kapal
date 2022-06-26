@@ -35,7 +35,7 @@
                             </a>
                             <a class="nav-link" href="operator.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                                Data Operator
+                                Data Akun
                             </a>
                         </div>
                     </div>
