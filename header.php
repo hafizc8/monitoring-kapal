@@ -37,6 +37,14 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 Data Akun
                             </a>
+                            <a class="nav-link" href="laporan-kapal.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Laporan Data Kapal
+                            </a>
+                            <a class="nav-link" href="laporan-invoice.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Laporan Data Invoice
+                            </a>
                         </div>
                     </div>
                 </nav>
